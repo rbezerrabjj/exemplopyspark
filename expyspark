@@ -1,0 +1,29 @@
+import pandas as pd
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder\
+    .appName("com.DataIngestionPyspark")\
+    .getOrCreate()
+
+
+# Lista de tuplas
+data = [("Joao", 41), ("Maria", 29), ("Luzia", 9), ("Mara", 9)]
+
+# criar dataframe utilizando lista
+df = spark.createDataFrame(data, ["nome", "idade"])
+
+# verificar estrutura
+df.printSchema()
+
+# verificar dataframe
+df.show()
+
+# exemplo para ler um arquivo csv não detalhado
+# data2 = spark.read.csv("")
+
+# exemplo para ler um arquivo csv detalhado
+# df = spark.read.format("com.databricks.spark.csv") \
+#     .option("header", "true") \
+#     .option("delimiter", "\t") \
+#     .option("inferSchema", "true") \
+#     .load("202112_RecebimentosRecursosPorFavorecido.csv")
